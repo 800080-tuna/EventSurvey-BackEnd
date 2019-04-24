@@ -1,0 +1,138 @@
+<dict>
+    <key>identifier</key>
+    <string>337C18F5-8860-424D-A9D8-F654071C1C72</string>
+    <key>name</key>
+    <string>ASTRO 2018</string>
+    <key>displayName</key>
+    <string>ASTRO 2018</string>
+    <key>prompt</key>
+    <string></string>
+    <key>exportedToEmailAddress</key>
+    <string>ann.marie.cerise@philips.com</string>
+    <key>pages</key>
+    <array>
+        <dict>
+            <key>identifier</key>
+            <string>3C06C35A-3129-49E6-91A8-C7B9D76E826C</string>
+            <key>title</key>
+            <string></string>
+            <key>questions</key>
+            <array>
+                <dict>
+                    <key>identifier</key>
+                    <string>1E0299C7-2B4C-40D2-BEB1-21091EDF7C5F</string>
+                    <key>questionType</key>
+                    <string>HorizontalReponseList</string>
+                    <key>questionText</key>
+                    <string>Based on your visit, how likely are you to recommend Philips?</string>
+                    <key>questionTextBoldSubrange</key>
+                    <dict>
+                        <key>startIndex</key>
+                        <integer>0</integer>
+                        <key>endIndex</key>
+                        <integer>0</integer>
+                    </dict>
+                    <key>uiIndex</key>
+                    <integer>0</integer>
+                    <key>responseControls</key>
+                    <array>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>More Likely</string>
+                        </dict>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>Less Likely</string>
+                        </dict>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>Unchanged</string>
+                        </dict>
+                    </array>
+                </dict>
+                <dict>
+                    <key>identifier</key>
+                    <string>E8F0CD2E-83E5-452C-9E51-C64B0F98F2E4</string>
+                    <key>questionType</key>
+                    <string>HorizontalReponseList</string>
+                    <key>questionText</key>
+                    <string>Based on your visit, how likely are you to consider purchasing Philips products or solutions?</string>
+                    <key>questionTextBoldSubrange</key>
+                    <dict>
+                        <key>startIndex</key>
+                        <integer>0</integer>
+                        <key>endIndex</key>
+                        <integer>0</integer>
+                    </dict>
+                    <key>uiIndex</key>
+                    <integer>1</integer>
+                    <key>responseControls</key>
+                    <array>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>More Likely</string>
+                        </dict>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>Less Likely</string>
+                        </dict>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>Unchanged</string>
+                        </dict>
+                    </array>
+                </dict>
+                <dict>
+                    <key>identifier</key>
+                    <string>DBAA264E-C587-4B13-AB6F-55ED877005B7</string>
+                    <key>questionType</key>
+                    <string>HorizontalReponseList</string>
+                    <key>questionText</key>
+                    <string>Based on your visit, how likely are you to rate Philips as a leader in health technology?</string>
+                    <key>questionTextBoldSubrange</key>
+                    <dict>
+                        <key>startIndex</key>
+                        <integer>0</integer>
+                        <key>endIndex</key>
+                        <integer>0</integer>
+                    </dict>
+                    <key>uiIndex</key>
+                    <integer>2</integer>
+                    <key>responseControls</key>
+                    <array>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>More Likely</string>
+                        </dict>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>Less Likely</string>
+                        </dict>
+                        <dict>
+                            <key>responseControlType</key>
+                            <string>HorizontalRadioButton</string>
+                            <key>responseText</key>
+                            <string>Unchanged</string>
+                        </dict>
+                    </array>
+                </dict>
+            </array>
+        </dict>
+    </array>
+</dict>

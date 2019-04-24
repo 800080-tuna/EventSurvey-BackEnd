@@ -1,0 +1,7 @@
+<?
+
+class Session {
+    public $identifier;
+}
+
+?>
