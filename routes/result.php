@@ -30,8 +30,6 @@ if( $HTTP_Method == "GET" ) {
             return;
         }
 
-        //  TODO: build client response JSON - don't simply return $res
-
         http_response_code(200);
         echo json_encode($res);
     }
@@ -42,11 +40,11 @@ if( $HTTP_Method == "GET" ) {
     $databaseController = new DatabaseController();
     $data = json_decode(file_get_contents("php://input"));
 
-    print_r("JJR - " . $data->question . " - " . $data->response . " - " . $data->eventIdentifer);
-
-    $res = $databaseController->createNewResult($data->question, $data->response, $data->eventIdentifer);
-
-
+    $res = $databaseController->createNewResult($data->question,
+                                                $data->moreLikely,
+                                                $data->lessLikely,
+                                                $data->unchanged,
+                                                $data->eventIdentifer);
 
     if($res['success'] == false) {
         print_r("Request Failed");
@@ -54,7 +52,6 @@ if( $HTTP_Method == "GET" ) {
         echo json_encode($res);
         return;
     }
-    // print_r("Request Succeeded");
 
     http_response_code(200);
     echo json_encode($res);
