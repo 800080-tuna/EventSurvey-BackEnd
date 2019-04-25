@@ -38,7 +38,7 @@ class DatabaseController {
         $pdoStatement->bindParam(':identifier', $event->identifier);
         $pdoStatement->bindParam(':name',      $event->name);
         if( $pdoStatement->execute() ) {
-            return array("success" => true);
+            return array("success" => true, "res" => $event);
         }
         // $pdoErrorStatement = $pdoStatement->errorInfo();
         return array("success" => false, "message" => "query failed");
@@ -60,7 +60,7 @@ class DatabaseController {
         $pdoStatement = $this->db->prepare($sql);
         if( $pdoStatement->execute() ) {
             $res = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
-            return array("success" => true, "res" => json_encode($res));
+            return array("success" => true, "res" => $res);
         }
         return array("success" => false, "message" => "query failed");
     }
