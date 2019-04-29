@@ -1,6 +1,7 @@
 <?
 include_once '../controllers/databaseController.php';
 include_once '../controllers/HTTPResponder.php';
+include_once '../controllers/authenticator.php';
 
 //  TODO: This CORS header needs to be set properly
 header("Access-Control-Allow-Origin: *");
@@ -8,6 +9,9 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+$authHeader = apache_request_headers()["Authorization"];
+Authenticator::authenticateRequest($authHeader);
 
 $HTTP_Method = filter_input( INPUT_SERVER, 'REQUEST_METHOD' );
 
