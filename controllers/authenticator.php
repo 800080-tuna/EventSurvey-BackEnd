@@ -46,10 +46,9 @@ class Authenticator {
 
     /// This method is invoked by all routes in order to validate JWT before processing request. If JWT validation fails, request fails with 401. If successful, method falls through.
     static public function authenticateRequest($authHeader) {
+        
         //  seperate auth type and auth token into seperate vars
         list($type, $token) = explode(" ", $authHeader, 2);
-
-        echo "type: $type";
 
         //  check auth type
         if (strcasecmp($type, "Bearer") == 0) {
