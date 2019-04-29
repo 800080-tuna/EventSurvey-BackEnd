@@ -18,8 +18,6 @@ if( $HTTP_Method == "GET" ) {
     HTTPResponder::sendReponse($res);
 } else if( $HTTP_Method == "POST" ) {
 
-    //  TODO: this is wrong - why am I accesing GET params in a POST - data should be added to request body as JSON
-    // // get posted data
     $data = json_decode(file_get_contents("php://input"));
     $eventName = $data->eventName;
     $databaseController = new DatabaseController();

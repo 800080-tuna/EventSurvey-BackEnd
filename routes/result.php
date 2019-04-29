@@ -32,4 +32,5 @@ if( $HTTP_Method == "GET" ) {
                                                 $data->eventIdentifer);
     HTTPResponder::sendReponse($res);
 }
+
 ?>
