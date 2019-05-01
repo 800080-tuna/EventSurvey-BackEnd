@@ -10,14 +10,22 @@
 class Database {
     public $conn;
 
-    //  TODO: don't store database info / credentials in plain text
-    private $host = "localhost";
-    private $db_name = "event_survey";
-    private $username = "root";
-    private $password = "!AVFX0770!";   //  TODO: DB credentials should not be in a public file
+    private $host;
+    private $db_name;
+    private $username;
+    private $password;
+
+    function __construct() {
+        $config = parse_ini_file(dirname(__FILE__) . '/../config.ini');
+        $this->host = $config["host"];
+        $this->db_name = $config["db_name"];
+        $this->username = $config["username"];
+        $this->password = $config["password"];
+    }
 
     /// Creates and returns database connection. Fails if unable to connect to database.
     public function getConnection() {
+        printf(" - JJR getConnection JJR - ");
         $this->conn = null;
         try{
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
