@@ -6,9 +6,9 @@
 //  Created by Joe Rouleau on 4/22/19.
 //
 
-include_once '../controllers/databaseController.php';
-include_once '../controllers/HTTPResponder.php';
-include_once '../controllers/authenticator.php';
+include_once(dirname(__FILE__) . '/../app/controllers/databaseController.php');
+include_once(dirname(__FILE__) . '/../app/controllers/HTTPResponder.php');
+include_once(dirname(__FILE__) . '/../app/controllers/authenticator.php');
 
 //  TODO: This CORS header needs to be set properly
 header("Access-Control-Allow-Origin: *");

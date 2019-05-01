@@ -9,13 +9,12 @@
 //  TODO:   ensure that JWTs are sent of HTTPS
 //          HTTPS helps prevents unauthorized users from stealing the sent JWT by making it so that the communication between the servers and the user cannot be intercepted.
 
-// generate json web token
-include_once 'keyGenerator.php';
-include_once 'apiResponseCodes.php';
-include_once '../libs/php-jwt-master/src/BeforeValidException.php';
-include_once '../libs/php-jwt-master/src/ExpiredException.php';
-include_once '../libs/php-jwt-master/src/SignatureInvalidException.php';
-include_once '../libs/php-jwt-master/src/JWT.php';
+include_once(dirname(__FILE__) . '/keyGenerator.php');
+include_once(dirname(__FILE__) . '/apiResponseCodes.php');
+include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/BeforeValidException.php');
+include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/ExpiredException.php');
+include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/SignatureInvalidException.php');
+include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/JWT.php');
 use \Firebase\JWT\JWT;
 
 class AuthenticationResponse {

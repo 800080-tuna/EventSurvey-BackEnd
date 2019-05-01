@@ -6,8 +6,8 @@
 //  Created by Joe Rouleau on 4/29/19.
 //
 
-include_once '../controllers/databaseController.php';
-include_once '../controllers/HTTPResponder.php';
+include_once(dirname(__FILE__) . '/../app/controllers/databaseController.php');
+include_once(dirname(__FILE__) . '/../app/controllers/HTTPResponder.php');
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
