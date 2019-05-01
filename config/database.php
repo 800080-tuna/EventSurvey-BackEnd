@@ -1,4 +1,11 @@
 <?
+//
+//  database.php
+//  EventSurveyDatabase
+//
+//  Created by Joe Rouleau on 2/17/19.
+//
+
 /// Manages mysql database connection
 class Database {
     public $conn;

@@ -1,4 +1,11 @@
 <?
+//
+//  apiResponseCodes.php
+//  EventSurveyDatabase
+//
+//  Created by Joe Rouleau on 2/17/19.
+//
+
 class KeyGenerator {
 
     //  TODO: don't write raw data to disk - use DB instead?

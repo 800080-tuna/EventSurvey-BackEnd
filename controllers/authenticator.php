@@ -1,4 +1,11 @@
 <?
+//
+//  apiResponseCodes.php
+//  EventSurveyDatabase
+//
+//  Created by Joe Rouleau on 2/17/19.
+//
+
 //  TODO:   ensure that JWTs are sent of HTTPS
 //          HTTPS helps prevents unauthorized users from stealing the sent JWT by making it so that the communication between the servers and the user cannot be intercepted.
 
@@ -46,7 +53,7 @@ class Authenticator {
 
     /// This method is invoked by all routes in order to validate JWT before processing request. If JWT validation fails, request fails with 401. If successful, method falls through.
     static public function authenticateRequest($authHeader) {
-        
+
         //  seperate auth type and auth token into seperate vars
         list($type, $token) = explode(" ", $authHeader, 2);
 

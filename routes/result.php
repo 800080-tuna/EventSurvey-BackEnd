@@ -1,4 +1,11 @@
 <?
+//
+//  databaseController.php
+//  EventSurveyDatabase
+//
+//  Created by Joe Rouleau on 4/22/19.
+//
+
 include_once '../controllers/databaseController.php';
 include_once '../controllers/HTTPResponder.php';
 include_once '../controllers/authenticator.php';

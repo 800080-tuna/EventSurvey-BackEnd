@@ -1,4 +1,11 @@
 <?
+//
+//  databaseController.php
+//  EventSurveyDatabase
+//
+//  Created by Joe Rouleau on 4/22/19.
+//
+
 include_once 'apiResponseCodes.php';
 include_once '../config/database.php';
 include_once '../model/event.php';

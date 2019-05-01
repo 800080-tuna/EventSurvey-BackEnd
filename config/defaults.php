@@ -1,4 +1,11 @@
 <?
+//
+//  defaults.php
+//  EventSurveyDatabase
+//
+//  Created by Joe Rouleau on 2/17/19.
+//
+
 // show error reporting
 error_reporting(E_ALL);
 

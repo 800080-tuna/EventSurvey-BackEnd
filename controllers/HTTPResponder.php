@@ -1,4 +1,11 @@
 <?
+//
+//  HTTPResponder.php
+//  EventSurveyDatabase
+//
+//  Created by Joe Rouleau on 4/24/19.
+//
+
 class HTTPResponder {
 
     public static function sendReponse($res) {
