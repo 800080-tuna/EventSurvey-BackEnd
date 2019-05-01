@@ -6,9 +6,6 @@
 //  Created by Joe Rouleau on 2/17/19.
 //
 
-//  TODO:   ensure that JWTs are sent of HTTPS
-//          HTTPS helps prevents unauthorized users from stealing the sent JWT by making it so that the communication between the servers and the user cannot be intercepted.
-
 include_once(dirname(__FILE__) . '/keyGenerator.php');
 include_once(dirname(__FILE__) . '/apiResponseCodes.php');
 include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/BeforeValidException.php');
@@ -18,9 +15,9 @@ include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/JWT.php');
 use \Firebase\JWT\JWT;
 
 class AuthenticationResponse {
-    public $success; // boolean value indacting whether or not the authencitation requestion has succeedded
-    public $errorMessage; // if auth request has failed, this property stores the error message
-    // constructor
+    public $success;
+    public $errorMessage;
+
     public function __construct($success, $errorMessage) {
         $this->success = $success;
         $this->errorMessage = $errorMessage;
@@ -29,42 +26,36 @@ class AuthenticationResponse {
 
 class Authenticator {
 
-    #pragma Mark - public interface
-
-    /// generates and returns a new JWT
     static public function newToken($user_id, $firstname, $lastname, $email) {
 
         $claims = Authenticator::jwtClaims();
-
         $jwtData = array(
             "id" => $user_id,
             "firstname" => $firstname,
             "lastname" => $lastname,
             "email" => $email
         );
-
         $token = array_merge($claims, $jwtData);
-
         $key = KeyGenerator::currentKey();
-
         return JWT::encode($token, $key);
     }
 
-    /// This method is invoked by all routes in order to validate JWT before processing request. If JWT validation fails, request fails with 401. If successful, method falls through.
     static public function authenticateRequest($authHeader) {
 
-        //  seperate auth type and auth token into seperate vars
         list($type, $token) = explode(" ", $authHeader, 2);
 
-        //  check auth type
         if (strcasecmp($type, "Bearer") == 0) {
 
-            //  validate auth token
+            // printf($token);
             $authResponse = Authenticator::validateToken($token);
+            // printf(" - JJR - authResponse: " . $authResponse . " - JJR - ");
+
             if( $authResponse->success === false ) {
+                printf("AuthTokenInvalid");
                 Authenticator::authDidFail(APIErrorCode::AuthTokenInvalid);
             }
         } else {
+            printf("AuthTokenMissing");
             Authenticator::authDidFail(APIErrorCode::AuthTokenMissing);
         }
     }
@@ -97,24 +88,13 @@ class Authenticator {
 
     /// validates the provided jwt argument
     static private function validateToken($jwt) {
-        if( $jwt ){
-            try {
-                //  at some point, the key will be recycled and will no longer be able to decode the jwt
-                //  at that point, login has expired and clients will need to request new jwt
-                //  app only auth will need to request new key
-                $key = KeyGenerator::currentKey();
-
-
-                //  if successfully decoded, return successful AuthenticationResponse
-                JWT::decode($jwt, $key, array('HS256'));
-                return new AuthenticationResponse(true, "Joe is Cool");
-            } catch (Exception $e) {
-                //  if unable to decode, jwt is invalid - fail
-                return new AuthenticationResponse(false, $e->getMessage());
-            }
-        } else {
-            //  if jwt is empty, fail
-            return new AuthenticationResponse(false, "");
+        try {
+            $key = KeyGenerator::currentKey();
+            JWT::decode($jwt, $key, array('HS256'));
+            return new AuthenticationResponse(true, "Auth Successful");
+        } catch (Exception $e) {
+            //  if unable to decode, jwt is invalid - fail
+            return new AuthenticationResponse(false, $e->getMessage());
         }
     }
 }
