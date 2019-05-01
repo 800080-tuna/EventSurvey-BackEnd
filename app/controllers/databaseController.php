@@ -6,12 +6,12 @@
 //  Created by Joe Rouleau on 4/22/19.
 //
 
+include_once(dirname(__FILE__) . '/authenticator.php');
 include_once(dirname(__FILE__) . '/apiResponseCodes.php');
 include_once(dirname(__FILE__) . '/../config/database.php');
 include_once(dirname(__FILE__) . '/../model/event.php');
 include_once(dirname(__FILE__) . '/../model/result.php');
 include_once(dirname(__FILE__) . '/../model/user.php');
-include_once(dirname(__FILE__) . '/authenticator.php');
 
 class DatabaseController {
 

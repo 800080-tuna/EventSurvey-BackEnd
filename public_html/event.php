@@ -8,26 +8,24 @@
 
 include_once(dirname(__FILE__) . '/../app/controllers/databaseController.php');
 include_once(dirname(__FILE__) . '/../app/controllers/HTTPResponder.php');
+include_once(dirname(__FILE__) . '/../app/controllers/headerAccess.php');
 include_once(dirname(__FILE__) . '/../app/controllers/authenticator.php');
 
-//  TODO: This CORS header needs to be set properly
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://philipseventsurvey.avfx.com");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: POST, GET");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-$authHeader = apache_request_headers()["Authorization"];
+$authHeader = HeaderAccess::fetchAuthHeader();
 Authenticator::authenticateRequest($authHeader);
 
-$HTTP_Method = filter_input( INPUT_SERVER, 'REQUEST_METHOD' );
-
-if( $HTTP_Method == "GET" ) {
+if( $_SERVER['REQUEST_METHOD'] === 'GET' ) {
 
     $databaseController = new DatabaseController();
     $res = $databaseController->fetchAllEvents();
     HTTPResponder::sendReponse($res);
-} else if( $HTTP_Method == "POST" ) {
+} else if( $_SERVER['REQUEST_METHOD'] === "POST" ) {
 
     $data = json_decode(file_get_contents("php://input"));
     $eventName = $data->eventName;

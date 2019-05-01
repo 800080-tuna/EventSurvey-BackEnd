@@ -25,7 +25,6 @@ class Database {
 
     /// Creates and returns database connection. Fails if unable to connect to database.
     public function getConnection() {
-        printf(" - JJR getConnection JJR - ");
         $this->conn = null;
         try{
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
