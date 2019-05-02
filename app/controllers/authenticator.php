@@ -45,17 +45,11 @@ class Authenticator {
         list($type, $token) = explode(" ", $authHeader, 2);
 
         if (strcasecmp($type, "Bearer") == 0) {
-
-            // printf($token);
             $authResponse = Authenticator::validateToken($token);
-            // printf(" - JJR - authResponse: " . $authResponse . " - JJR - ");
-
             if( $authResponse->success === false ) {
-                printf("AuthTokenInvalid");
                 Authenticator::authDidFail(APIErrorCode::AuthTokenInvalid);
             }
         } else {
-            printf("AuthTokenMissing");
             Authenticator::authDidFail(APIErrorCode::AuthTokenMissing);
         }
     }

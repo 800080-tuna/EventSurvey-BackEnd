@@ -34,7 +34,6 @@ class DatabaseController {
 
         $tableName = "Event";
         $event = new Event(uniqid(), $eventName);
-        // $event = new Event("5cbfbd376eeeb", $eventName);
 
         $query = "INSERT INTO " . $tableName . "
                 SET
@@ -50,7 +49,6 @@ class DatabaseController {
         if( $pdoStatement->execute() ) {
             return array("success" => true, "res" => $event);
         }
-        // $pdoErrorStatement = $pdoStatement->errorInfo();
         return array("success" => false, "apiErrorCode" => APIErrorCode::QueryFailed);
     }
 
@@ -93,13 +91,10 @@ class DatabaseController {
             $res = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
             return array("success" => true, "res" => $res);
         }
-        print_r($pdoStatement->errorInfo());
         return array("success" => false, "apiErrorCode" => APIErrorCode::QueryFailed);
     }
 
     function createNewResult($question, $moreLikely, $lessLikely, $unchanged, $eventIdentifer) {
-
-        // print_r("more: {$moreLikely}  --  less: {$lessLikely}  --  unchanged: {$unchanged}");
 
         $result = new Result(uniqid(), $question, $moreLikely, $lessLikely, $unchanged, $eventIdentifer);
 
@@ -132,7 +127,6 @@ class DatabaseController {
         if( $pdoStatement->execute() ) {
             return array("success" => true);
         }
-        print_r($pdoStatement->errorInfo());
         return array("success" => false, "apiErrorCode" => APIErrorCode::QueryFailed);
     }
 
@@ -162,7 +156,6 @@ class DatabaseController {
             $jwt = Authenticator::newToken($user->id, $user->firstname, $user->lastname, $user->email);
             return array("success" => true, "res" => $jwt);
         }
-        print_r($pdoStatement->errorInfo());
         return array("success" => false, "message" => "query failed");
     }
 }
