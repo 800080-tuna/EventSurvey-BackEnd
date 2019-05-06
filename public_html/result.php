@@ -34,11 +34,8 @@ if( $_SERVER['REQUEST_METHOD'] === "GET" ) {
 
     $databaseController = new DatabaseController();
     $data = json_decode(file_get_contents("php://input"));
-    $res = $databaseController->createNewResult($data->question,
-                                                $data->moreLikely,
-                                                $data->lessLikely,
-                                                $data->unchanged,
-                                                $data->eventIdentifer);
+    // print_r($data);
+    $res = $databaseController->createNewResult($data);
     HTTPResponder::sendReponse($res);
 }
 

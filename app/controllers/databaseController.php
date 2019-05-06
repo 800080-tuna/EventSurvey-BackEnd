@@ -94,40 +94,48 @@ class DatabaseController {
         return array("success" => false, "apiErrorCode" => APIErrorCode::QueryFailed);
     }
 
-    function createNewResult($question, $moreLikely, $lessLikely, $unchanged, $eventIdentifer) {
+    function createNewResult($resultArray) {
 
-        $result = new Result(uniqid(), $question, $moreLikely, $lessLikely, $unchanged, $eventIdentifer);
+        foreach ($resultArray as $resultData) {
 
-        $query = "INSERT INTO Result
-                  SET
-                    identifier = :identifier,
-                    question = :question,
-                    moreLikely = :moreLikely,
-                    lessLikely = :lessLikely,
-                    unchanged = :unchanged,
-                    event_id = :event_id";
+            $result = new Result(uniqid(),  $resultData->question,
+                                            $resultData->moreLikely,
+                                            $resultData->lessLikely,
+                                            $resultData->unchanged,
+                                            $resultData->eventIdentifer);
 
-        // prepare the query
-        $pdoStatement = $this->db->prepare($query);
+            $query = "INSERT INTO Result
+                      SET
+                        identifier = :identifier,
+                        question = :question,
+                        moreLikely = :moreLikely,
+                        lessLikely = :lessLikely,
+                        unchanged = :unchanged,
+                        event_id = :event_id";
 
-        $result->identifier=htmlspecialchars(strip_tags($result->identifier));
-        $result->question=htmlspecialchars(strip_tags($result->question));
-        $result->moreLikely=htmlspecialchars(strip_tags($result->moreLikely));
-        $result->lessLikely=htmlspecialchars(strip_tags($result->lessLikely));
-        $result->unchanged=htmlspecialchars(strip_tags($result->unchanged));
-        $result->event_id=htmlspecialchars(strip_tags($result->event_id));
+            // prepare the query
+            $pdoStatement = $this->db->prepare($query);
 
-        $pdoStatement->bindParam(':identifier', $result->identifier);
-        $pdoStatement->bindParam(':question',   $result->question);
-        $pdoStatement->bindParam(':moreLikely',   $result->moreLikely);
-        $pdoStatement->bindParam(':lessLikely',   $result->lessLikely);
-        $pdoStatement->bindParam(':unchanged',   $result->unchanged);
-        $pdoStatement->bindParam(':event_id',   $result->event_id);
+            $result->identifier=htmlspecialchars(strip_tags($result->identifier));
+            $result->question=htmlspecialchars(strip_tags($result->question));
+            $result->moreLikely=htmlspecialchars(strip_tags($result->moreLikely));
+            $result->lessLikely=htmlspecialchars(strip_tags($result->lessLikely));
+            $result->unchanged=htmlspecialchars(strip_tags($result->unchanged));
+            $result->event_id=htmlspecialchars(strip_tags($result->event_id));
 
-        if( $pdoStatement->execute() ) {
-            return array("success" => true);
+            $pdoStatement->bindParam(':identifier', $result->identifier);
+            $pdoStatement->bindParam(':question',   $result->question);
+            $pdoStatement->bindParam(':moreLikely',   $result->moreLikely);
+            $pdoStatement->bindParam(':lessLikely',   $result->lessLikely);
+            $pdoStatement->bindParam(':unchanged',   $result->unchanged);
+            $pdoStatement->bindParam(':event_id',   $result->event_id);
+
+            if( $pdoStatement->execute() == false ) {
+                return array("success" => false, "apiErrorCode" => APIErrorCode::QueryFailed);
+            }
         }
-        return array("success" => false, "apiErrorCode" => APIErrorCode::QueryFailed);
+
+        return array("success" => true);
     }
 
     //  USERS
