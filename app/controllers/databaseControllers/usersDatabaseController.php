@@ -19,7 +19,7 @@ class UsersDatabaseController extends DatabaseController {
 
         if($emailExists == true) {
             //  if $res is true, email exists - notify client
-            return array("success" => false, "message" => APIErrorCode::EmailExists);
+            return array("success" => false, "apiErrorCode" => APIErrorCode::EmailExists);
         }
 
         $sql = "INSERT INTO User
@@ -59,8 +59,6 @@ class UsersDatabaseController extends DatabaseController {
     }
 
     function emailExists($emailAddress) {
-        print("email: {$emailAddress} :email - ");
-
         $emailAddress=htmlspecialchars(strip_tags($emailAddress));
         $parameters['emailAddress'] = $emailAddress;
         $sql = "SELECT count(identifier) AS count FROM User WHERE (emailAddress = :emailAddress)";
