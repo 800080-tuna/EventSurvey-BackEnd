@@ -19,4 +19,6 @@ class DatabaseController {
         $this->db = $this->database->getConnection();
     }
 }
+// $pdoStatementError = $pdoStatement->errorInfo();
+// print_r($pdoStatementError);
 ?>

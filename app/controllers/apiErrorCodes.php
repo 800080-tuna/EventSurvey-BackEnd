@@ -14,5 +14,7 @@ abstract class APIErrorCode
     const AuthFailedPassword    = 1003;     //  Passwords do not match
     const QueryFailed           = 1004;     //  Datebase Query Failed
     const EventExists           = 1005;     //  An event record already exists with the provided name
+    const EmailExists           = 1006;     //  Can't create user, that email already exists
+
 }
 ?>

@@ -1,6 +1,6 @@
 <?
 //
-//  databaseController.php
+//  result.php
 //  EventSurveyDatabase
 //
 //  Created by Joe Rouleau on 4/22/19.
