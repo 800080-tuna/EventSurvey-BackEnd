@@ -11,13 +11,13 @@ class UsersDatabaseController extends DatabaseController {
     // create new user record
     function createUser($firstName, $lastName, $emailAddress, $password) {
 
-        $res = $this->emailExists($emailAddress);
-        if(is_array($res)) {
+        $emailExists = $this->emailExists($emailAddress);
+        if(is_array($emailExists)) {
             //  if $res is array, its a response that should be forwarded to client
             return $res;
         }
 
-        if($res == true) {
+        if($emailExists == true) {
             //  if $res is true, email exists - notify client
             return array("success" => false, "message" => APIErrorCode::EmailExists);
         }
@@ -59,22 +59,23 @@ class UsersDatabaseController extends DatabaseController {
     }
 
     function emailExists($emailAddress) {
+        print("email: {$emailAddress} :email - ");
 
         $emailAddress=htmlspecialchars(strip_tags($emailAddress));
-        $parameters['emailAddress'] = $user->emailAddress;
-        $sql = "SELECT COUNT(*) FROM User WHERE (emailAddress = :emailAddress)";
+        $parameters['emailAddress'] = $emailAddress;
+        $sql = "SELECT count(identifier) AS count FROM User WHERE (emailAddress = :emailAddress)";
 
         $pdoStatement = $this->db->prepare($sql);
         if($pdoStatement->execute($parameters)) {
-            $num = $pdoStatement->rowCount();
+            $res = $pdoStatement->fetch();
+            $count = $res["count"];
 
-            if($num===true) {
-                return true;
+            if($count == 0) {
+                return false;
             }
-            return false;
+            return true;
         }
-        $pdoStatementError = $pdoStatement->errorInfo();
-        print_r($pdoStatementError);
+        // $pdoStatementError = $pdoStatement->errorInfo();
         return array("success" => false, "apiErrorCode" => APIErrorCode::QueryFailed);
     }
 
