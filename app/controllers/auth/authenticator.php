@@ -7,11 +7,11 @@
 //
 
 include_once(dirname(__FILE__) . '/keyGenerator.php');
-include_once(dirname(__FILE__) . '/apiResponseCodes.php');
-include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/BeforeValidException.php');
-include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/ExpiredException.php');
-include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/SignatureInvalidException.php');
-include_once(dirname(__FILE__) . '/../libs/php-jwt-master/src/JWT.php');
+include_once(dirname(__FILE__) . '/../apiErrorCodes.php');
+include_once(dirname(__FILE__) . '/../../libs/php-jwt-master/src/BeforeValidException.php');
+include_once(dirname(__FILE__) . '/../../libs/php-jwt-master/src/ExpiredException.php');
+include_once(dirname(__FILE__) . '/../../libs/php-jwt-master/src/SignatureInvalidException.php');
+include_once(dirname(__FILE__) . '/../../libs/php-jwt-master/src/JWT.php');
 use \Firebase\JWT\JWT;
 
 class AuthenticationResponse {

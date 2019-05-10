@@ -6,10 +6,10 @@
 //  Created by Joe Rouleau on 4/22/19.
 //
 
-include_once(dirname(__FILE__) . '/../app/controllers/databaseController.php');
+include_once(dirname(__FILE__) . '/../app/controllers/databaseControllers/resultsDatabaseController.php');
 include_once(dirname(__FILE__) . '/../app/controllers/HTTPResponder.php');
 include_once(dirname(__FILE__) . '/../app/controllers/headerAccess.php');
-include_once(dirname(__FILE__) . '/../app/controllers/authenticator.php');
+include_once(dirname(__FILE__) . '/../app/controllers/auth/authenticator.php');
 
 header("Access-Control-Allow-Origin: https://philipseventsurvey.avfx.com");
 header("Content-Type: application/json; charset=UTF-8");
@@ -24,7 +24,7 @@ if( $_SERVER['REQUEST_METHOD'] === "GET" ) {
 
     if (isset($_GET['event_identifier'])) {
         $eventIdentifier = $_GET['event_identifier'];
-        $databaseController = new DatabaseController();
+        $databaseController = new ResultsDatabaseController();
         $res = $databaseController->fetchResultForEventWithIdentifier($eventIdentifier);
         HTTPResponder::sendReponse($res);
     } else {
@@ -32,7 +32,7 @@ if( $_SERVER['REQUEST_METHOD'] === "GET" ) {
     }
 } else if( $_SERVER['REQUEST_METHOD'] === "POST" ) {
 
-    $databaseController = new DatabaseController();
+    $databaseController = new ResultsDatabaseController();
     $data = json_decode(file_get_contents("php://input"));
     // print_r($data);
     $res = $databaseController->createNewResult($data);

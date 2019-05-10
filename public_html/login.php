@@ -6,7 +6,7 @@
 //  Created by Joe Rouleau on 4/29/19.
 //
 
-include_once(dirname(__FILE__) . '/../app/controllers/databaseController.php');
+include_once(dirname(__FILE__) . '/../app/controllers/databaseControllers/usersDatabaseController.php');
 include_once(dirname(__FILE__) . '/../app/controllers/HTTPResponder.php');
 
 header("Access-Control-Allow-Origin: https://philipseventsurvey.avfx.com");
@@ -18,7 +18,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
     $data = json_decode(file_get_contents("php://input"));
-    $databaseController = new DatabaseController();
+    $databaseController = new UsersDatabaseController();
 
     $res = $databaseController->authenticateUserCredentials($data->emailAddress, $data->password);
     HTTPResponder::sendReponse($res);

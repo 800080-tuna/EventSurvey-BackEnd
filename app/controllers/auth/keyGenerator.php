@@ -14,7 +14,7 @@ class KeyGenerator {
     static private function filepath() {
         $current_directory = dirname(__FILE__);
         $keyDataDirectory = dirname(dirname($current_directory));
-        return $keyDataDirectory . "/app/private/keydata.txt";
+        return $keyDataDirectory . "/private/keydata.txt";
     }
 
     ///  returns the expiration date for the current key data

@@ -6,10 +6,10 @@
 //  Created by Joe Rouleau on 4/22/19.
 //
 
-include_once(dirname(__FILE__) . '/../app/controllers/databaseController.php');
+include_once(dirname(__FILE__) . '/../app/controllers/databaseControllers/eventDatabaseController.php');
 include_once(dirname(__FILE__) . '/../app/controllers/HTTPResponder.php');
 include_once(dirname(__FILE__) . '/../app/controllers/headerAccess.php');
-include_once(dirname(__FILE__) . '/../app/controllers/authenticator.php');
+include_once(dirname(__FILE__) . '/../app/controllers/auth/authenticator.php');
 
 header("Access-Control-Allow-Origin: https://philipseventsurvey.avfx.com");
 header("Content-Type: application/json; charset=UTF-8");
@@ -22,14 +22,14 @@ Authenticator::authenticateRequest($authHeader);
 
 if( $_SERVER['REQUEST_METHOD'] === 'GET' ) {
 
-    $databaseController = new DatabaseController();
+    $databaseController = new EventDatabaseController();
     $res = $databaseController->fetchAllEvents();
     HTTPResponder::sendReponse($res);
 } else if( $_SERVER['REQUEST_METHOD'] === "POST" ) {
 
     $data = json_decode(file_get_contents("php://input"));
     $eventName = $data->eventName;
-    $databaseController = new DatabaseController();
+    $databaseController = new EventDatabaseController();
     $res = $databaseController->createNewEvent($eventName);
     HTTPResponder::sendReponse($res);
 }
