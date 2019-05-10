@@ -29,7 +29,7 @@ class DatabaseController {
 
         $existingRecord = $this->fetchEventNamed($eventName);
         if($existingRecord != null) {
-            return array("success" => true, "apiErrorCode" => APIErrorCode::EventExists);
+            return array("success" => false, "apiErrorCode" => APIErrorCode::EventExists);
         }
 
         $tableName = "Event";
@@ -145,24 +145,25 @@ class DatabaseController {
         $user = new User($emailAddress, $password);
 
         $parameters['emailAddress'] = $user->emailAddress;
-        $sql = "SELECT password FROM User WHERE (emailAddress = :emailAddress)";
+        $sql = "SELECT password, type FROM User WHERE (emailAddress = :emailAddress)";
         $pdoStatement = $this->db->prepare($sql);
 
         if( $pdoStatement->execute($parameters) ) {
 
             $res = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
             $storePassword = $res["0"]["password"];
+            $userType = $res["0"]["type"];
 
             if($storePassword == null) {
-                return array("success" => true, "apiErrorCode" => APIErrorCode::AuthFailedEmail);
+                return array("success" => false, "apiErrorCode" => APIErrorCode::AuthFailedEmail);
             }
 
             if($storePassword != $user->password) {
-                return array("success" => true, "apiErrorCode" => APIErrorCode::AuthFailedPassword);
+                return array("success" => false, "apiErrorCode" => APIErrorCode::AuthFailedPassword);
             }
 
             $jwt = Authenticator::newToken($user->id, $user->firstname, $user->lastname, $user->email);
-            return array("success" => true, "res" => $jwt);
+            return array("success" => true, "res" => $jwt, "type" => $userType);
         }
         return array("success" => false, "message" => "query failed");
     }
