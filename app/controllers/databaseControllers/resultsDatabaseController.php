@@ -30,13 +30,15 @@ class ResultsDatabaseController extends DatabaseController {
 
     function createNewResult($resultArray) {
 
+
+
         foreach ($resultArray as $resultData) {
 
             $result = new Result(uniqid(),  $resultData->question,
                                             $resultData->moreLikely,
                                             $resultData->lessLikely,
                                             $resultData->unchanged,
-                                            $resultData->eventIdentifer);
+                                            $resultData->eventIdentifier);
 
             $query = "INSERT INTO Result
                       SET
