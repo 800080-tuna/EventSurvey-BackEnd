@@ -18,9 +18,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
     $data = json_decode(file_get_contents("php://input"));
+    $userData = $data["0"];
     $databaseController = new UsersDatabaseController();
-
-    $res = $databaseController->authenticateUserCredentials($data->emailAddress, $data->password);
+    $res = $databaseController->authenticateUserCredentials($userData->emailAddress, $userData->password);
     HTTPResponder::sendReponse($res);
 }
 ?>

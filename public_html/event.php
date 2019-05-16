@@ -28,7 +28,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'GET' ) {
 } else if( $_SERVER['REQUEST_METHOD'] === "POST" ) {
 
     $data = json_decode(file_get_contents("php://input"));
-    $eventName = $data->eventName;
+    $eventData = $data["0"];
+    $eventName = $eventData->eventName;
     $databaseController = new EventDatabaseController();
     $res = $databaseController->createNewEvent($eventName);
     HTTPResponder::sendReponse($res);
