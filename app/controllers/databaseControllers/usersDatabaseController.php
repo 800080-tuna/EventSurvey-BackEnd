@@ -80,7 +80,7 @@ class UsersDatabaseController extends DatabaseController {
     function authenticateUserCredentials($emailAddress, $password) {
 
         $user = new User($emailAddress, $password);
-
+        
         $parameters['emailAddress'] = $user->emailAddress;
         $sql = "SELECT password, type FROM User WHERE (emailAddress = :emailAddress)";
         $pdoStatement = $this->db->prepare($sql);

@@ -34,7 +34,6 @@ if( $_SERVER['REQUEST_METHOD'] === "GET" ) {
 
     $databaseController = new ResultsDatabaseController();
     $data = json_decode(file_get_contents("php://input"));
-    // print_r($data);
     $res = $databaseController->createNewResult($data);
     HTTPResponder::sendReponse($res);
 }
